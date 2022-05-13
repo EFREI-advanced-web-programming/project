@@ -42,10 +42,10 @@ router.use((req, res, next) => {
 
 //to login, email and password must be sent in the body
 router.post("/login", async (req, res) => {
-  if (req.session.userId !== null) {
-    res.status(400).json({ message: "There is already a user logged. Please logout first" });
-    return
-  }
+  // if (req.session.userId !== null) {
+  //   res.status(400).json({ message: "There is already a user logged. Please logout first" });
+  //   return
+  // }
 
   const password = req.body.password;
   const login = req.body.login;
@@ -91,10 +91,10 @@ router.post("/login", async (req, res) => {
   }
 });
 router.post("/register", async (req, res) => {
-  if (req.session.userId !== null) {
-    res.status(400).json({ message: "There is already a user logged. Please logout first" });
-    return
-  }
+  // if (req.session.userId !== null) {
+  //   res.status(400).json({ message: "There is already a user logged. Please logout first" });
+  //   return
+  // }
   let name = req.body.name;
   let lastname = req.body.lastname;
   let login = req.body.login;
@@ -143,15 +143,13 @@ router.post("/register", async (req, res) => {
   })
 })
 router.post("/logout", async (req, res) => {
-  if (req.session.userId === null) {
-    res.status(400).json({ message: "nobody was logged in" });
-    return
-  } else {
-    req.session.userId = null;
-    res.status(200).json({ message: "logged out" });
-  }
-
-
+  // if (req.session.userId === null) {
+  //   res.status(400).json({ message: "nobody was logged in" });
+  //   return
+  // } else {
+  req.session.userId = null;
+  res.status(200).json({ message:"logged out"});
+  // }
 });
 
 
@@ -529,7 +527,7 @@ router.post("/basket/validate", (req, res) => {
       let basketLines = await db.promise().query(`select basket_line.* from basket natural join basket_line where user_id=${req.session.userId};`);
       console.log("after await")
 
-      
+
       for (let basketLine of basketLines[0]) {
         /* for each basketLine: 
          * - get the stock of the book
@@ -549,10 +547,10 @@ router.post("/basket/validate", (req, res) => {
 
       //after deleting all the basketLines, delete the basket itself
       let deleteBasketResponse = await db.promise().query(`DELETE FROM basket WHERE user_id = ${req.session.userId}`);
-      if(deleteBasketResponse[0].affectedRows === 1){
+      if (deleteBasketResponse[0].affectedRows === 1) {
         res.status(204).json({ message: "Your basket has been correctly processed" });
-      } else{
-        res.status(400).json({message : "Your basket could not be deleted, please try again"});
+      } else {
+        res.status(400).json({ message: "Your basket could not be deleted, please try again" });
       }
     }
   })

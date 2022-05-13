@@ -14,14 +14,32 @@
           <header>
             <h1>À la bonne franquette</h1>
             <nav>
-              <router-link to='/'>Accueil</router-link>
-              <router-link to='/panier'>Panier</router-link>
+              <h1>Books</h1>
+              <div v-for=" book in books">
+                <span v-text = "book.book_id"></span>
+                <span v-text = "book.name"></span>
+                <!-- <span v-text = "book.url"></span> -->
+                <span v-text = "book.stock"></span>
+              </div>
+              <br>
+              <br>
+              <br>
+<h1>Basket</h1>
+              <div v-for=" basketLine in basket">
+                book_id: <span v-text = "basketLine.book_id"></span>
+                | basket_id: <span v-text = "basketLine.basket_id"></span>
+                | basket_line_id: <span v-text = "basketLine.basket_line_id"></span>
+                | qte: <span v-text = "basketLine.qte"></span>
+              </div>
+              <!-- <router-link to='/'>Accueil</router-link> -->
+              <!-- <router-link to='/panier'>Panier</router-link>
               
-              <router-link to='/login'>Se Connecter</router-link>
+              <router-link to='/login'>Se Connecter</router-link> -->
             </nav>
           </header>
           <main>
-            <router-view
+            WELCOME TO MAIN
+            <!-- <router-view
               :articles="articles"
               :panier="panier"
               :invaliddata="invaliddata"
@@ -34,7 +52,7 @@
               @remove-from-cart="removeFromPanier"
               @pay-cart="payer"
               @login="login"
-            ></router-view>
+            ></router-view> -->
           </main>
         </div>
         <script src="/vue-application.js"></script>

@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const articles = require('../data/articles.js')
 const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
 const db = mysql.createConnection({

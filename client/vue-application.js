@@ -1,12 +1,12 @@
-// const Home = window.httpVueLoader('./components/Home.vue')
-// const Panier = window.httpVueLoader('./components/Panier.vue')
+const Home = window.httpVueLoader('./components/Home.vue')
+const Basket = window.httpVueLoader('./components/Basket.vue')
 // const AddArticle= window.httpVueLoader('./components/addArticle.vue')
-// const Login = window.httpVueLoader('./components/Login.vue')
+const Login = window.httpVueLoader('./components/Login.vue')
 
 const routes = [
-  // { path: '/', component: Home, name: 'home' },
-  // { path: '/panier', component: Panier, name: 'panier' },
-  // {path: '/login', component: Login, name: 'login'}
+  { path: '/', component: Home, name: 'home' },
+  { path: '/basket', component: Basket, name: 'basket'},
+  {path: '/login', component: Login, name: 'login'}
 ]
 
 const router = new VueRouter({
@@ -23,12 +23,12 @@ var app = new Vue({
     userId: -1,
   },
   async mounted() {
-    // let credentials = {
-    //   "login": "admin1",
-    //   "password": "1234"
-    // }
+    let credentials = {
+      "login": "admin1",
+      "password": "1234"
+    }
     // let logout = await this.logout();
-    // let login = await this.login(credentials);
+    await this.login(credentials);
  
     const res = await axios.get('/api/books')
     this.books = res.data;

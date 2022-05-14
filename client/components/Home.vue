@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <article v-for="article in articles" :key="article.id">
       <div class="article-img">
         <div :style="{ backgroundImage: 'url(' + article.image + ')' }">
@@ -29,64 +29,67 @@
       </div>
     </article>
     <add-article @add-article='addArticle'></add-article>
+  </div> -->
+  <div>
+    HOME VIEW
   </div>
 </template>
 
 <script>
 module.exports = {
   props: {
-    articles: { type: Array, default: [] },
-    panier: { type: Object }
+    // articles: { type: Array, default: [] },
+    // panier: { type: Object }
   },
   data () {
     return {
-      editingArticle: {
-        id: -1,
-        name: '',
-        description: '',
-        image: '',
-        price: 0
-      },
-      articleToAddToCart: {
-        id: -1,
-        quantity : 1
-      }
+      // editingArticle: {
+      //   id: -1,
+      //   name: '',
+      //   description: '',
+      //   image: '',
+      //   price: 0
+      // },
+      // articleToAddToCart: {
+      //   id: -1,
+      //   quantity : 1
+      // }
     }
   },
   methods: {
-    addArticle (newArticle) {
-      this.$emit('add-article', newArticle)
-    },
-    deleteArticle (articleId) {
-      this.$emit('delete-article', articleId)
-    },
-    editArticle (article) {
-      this.editingArticle.id = article.id
-      this.editingArticle.name = article.name
-      this.editingArticle.description = article.description
-      this.editingArticle.image = article.image
-      this.editingArticle.price = article.price
-    },
-    sendEditArticle () {
-      this.$emit('update-article', this.editingArticle)
-      this.abortEditArticle()
-    },
-    abortEditArticle () {
-      this.editingArticle = {
-        id: -1,
-        name: '',
-        description: '',
-        image: '',
-        price: 0
-      }
-    },
-    addPanier (article) {
-      this.articleToAddToCart.id = article.id
-      this.$emit('add-article-cart', this.articleToAddToCart)
-    }
+    // addArticle (newArticle) {
+    //   this.$emit('add-article', newArticle)
+    // },
+    // deleteArticle (articleId) {
+    //   this.$emit('delete-article', articleId)
+    // },
+    // editArticle (article) {
+    //   this.editingArticle.id = article.id
+    //   this.editingArticle.name = article.name
+    //   this.editingArticle.description = article.description
+    //   this.editingArticle.image = article.image
+    //   this.editingArticle.price = article.price
+    // },
+    // sendEditArticle () {
+    //   this.$emit('update-article', this.editingArticle)
+    //   this.abortEditArticle()
+    // },
+    // abortEditArticle () {
+    //   this.editingArticle = {
+    //     id: -1,
+    //     name: '',
+    //     description: '',
+    //     image: '',
+    //     price: 0
+    //   }
+    // },
+    // addPanier (article) {
+    //   this.articleToAddToCart.id = article.id
+    //   this.$emit('add-article-cart', this.articleToAddToCart)
+    // }
   },
   components:{
-        AddArticle
+        // AddArticle
     },
 }
 </script>

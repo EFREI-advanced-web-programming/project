@@ -1,12 +1,14 @@
 const Home = window.httpVueLoader('./components/Home.vue')
 const Basket = window.httpVueLoader('./components/Basket.vue')
 // const AddArticle= window.httpVueLoader('./components/addArticle.vue')
+const Catalogue = window.httpVueLoader('./components/Catalogue.vue')
 const Login = window.httpVueLoader('./components/Login.vue')
 
 const routes = [
   { path: '/', component: Home, name: 'home' },
   { path: '/basket', component: Basket, name: 'basket'},
-  {path: '/login', component: Login, name: 'login'}
+  { path: '/login', component: Login, name: 'login'},
+  { path:'/catalogue', component : Catalogue, name: 'catalogue'}
 ]
 
 const router = new VueRouter({
@@ -21,6 +23,7 @@ var app = new Vue({
     basket: [],
     basketId: -1,
     userId: -1,
+    isAdmin : false
   },
   async mounted() {
     let credentials = {
@@ -49,8 +52,14 @@ var app = new Vue({
     async login(credentials) {
       if (this.userId === -1) {
         const res = await axios.post('/api/login', credentials);
-        this.userId = credentials.user_id;
+        console.log(res.data);
+        this.userId = res.data.data.user_id;
+        if(res.data.data.profil==="administrator"){
+          this.isAdmin = true;
+        }
       }
+      console.log("userId: " + this.userId);
+      console.log("isAdmin: " + this.isAdmin);
       await this.getBasket();
     },
     async register(user) {
@@ -65,6 +74,7 @@ var app = new Vue({
         const res = await axios.post('/api/logout');
         this.basket = [];
         this.userId = -1;
+        this.isAdmin = false;
         this.basketId = -1
       }
     },
@@ -83,10 +93,17 @@ var app = new Vue({
       Vue.set(this.books, index, book);
     },
     async deleteBook(book) {
-      const res = await axios.delete(`/api/books/${book.book_id}`);
-      const findIndexFunc = (element) => element.book_id === book.book_id;
-      let index = this.books.findIndex(findIndexFunc);
-      this.books.splice(index, 1);
+      console.log("deleteBook");
+      if(this.isAdmin){
+        const res = await axios.delete(`/api/books/${book.book_id}`);
+        const findIndexFunc = (element) => element.book_id === book.book_id;
+        let index = this.books.findIndex(findIndexFunc);
+        this.books.splice(index, 1);
+
+        index = this.basket.findIndex(findIndexFunc);
+        if(index !== undefined)
+        this.basket.splice(index, 1);
+      }
     },
     async getBasket() {
       const res = await axios.get('/api/basket');

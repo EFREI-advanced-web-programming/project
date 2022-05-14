@@ -5,11 +5,12 @@
       <div class="panier">
         <article v-for="article in panier.articles" :key="article.id">
           <div class="article-img">
-            <div :style="{ backgroundImage: 'url(' + articles[article.id -1].image + ')' }">
+            <div v-if="article.image === ''"><img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"/></div>
+            <div v-else :style="{ backgroundImage: 'url(' + articles[article.id -1].image + ')' }">
             </div>
           </div>
           <div class="article-content">
-            <div class="article-title" v-if="editingArticle.id != article.id">
+            <div v-if="editingArticle.id != article.id" class="article-title" >
               <h2>{{ articles[article.id -1].name }} - {{ articles[article.id -1].price }}€  - x{{article.quantity}}</h2>
               <button @click='editArticleInCart(article)'>Modifier</button>
               <button @click="removeFromCart(article)">Supprimer</button>

@@ -9,6 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/http-vue-loader/src/httpVueLoader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
@@ -18,17 +19,30 @@
     <header>
       <h1>EFREI LIBRARY</h1>
       <nav>
-        <router-link to='/'>Accueil</router-link>
-        <router-link to='/basket'>My basket</router-link>              
+        <router-link to='/'>Accueil</router-link> | 
+        <router-link to ='/catalogue'>Catalogue</router-link> | 
+        <router-link to='/basket'>My basket</router-link> |             
        <router-link to='/login'>login</router-link>
        <router-view
        :books="books"
        :basket="basket"
+       :isadmin="isAdmin"
+       :userid="userId"
        @delete-item-from-basket = "deleteItemFromBasket"
        @update-item-at-basket = "updateItemAtBasket"
        @validate-basket="validateBasket"
        @clear-basket="deleteBasket"
+
+       @get-books = "getBooks"
+       @add-item-to-basket = "addItemToBasket"
+       @remove-book-from-basket = "deleteItemFromBasket"
+       @delete-book="deleteBook"
+       @add-book="addBook"
      ></router-view>
+
+     <!-- <h1>userId</h1>
+        <div v-text="userId"></div> -->
+        
      <!-- :invaliddata="invaliddata"
        :user="user"
        @add-article="addArticle"

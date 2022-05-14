@@ -1,9 +1,9 @@
 <template>
-  <div id="login">
+  <!-- <div id="login">
       <form v-on:submit.prevent="login">
         <div class="form-group">
           <label for="exampleInputEmail1">Adresse email</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                  placeholder="Entrez l'Email" v-model="credential.email" v-bind:class="{'is-invalid': invaliddata}"
                  required>
         </div>
@@ -18,7 +18,8 @@
         <button type="submit" class="btn btn-primary">Se Connecter</button>
 
       </form>
-  </div>
+  </div> -->
+  <div>LOGIN VUE</div>
 </template>
 
 <script>

@@ -99,7 +99,6 @@ module.exports = {
     methods: {
         getBook(basketLine) {
             let book = this.books.find(b => b.book_id === basketLine.book_id);
-            // console.log(book);
             return book;
         },
         editBasketLine(basketLine) {

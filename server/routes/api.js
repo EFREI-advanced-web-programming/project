@@ -68,7 +68,8 @@ router.post("/login", async (req, res) => {
           if (samePAssword) {
             resolve({
               user_id: res[0].user_id,
-              login: res[0].login
+              login: res[0].login,
+              profil:res[0].profil
             });
           } else {
             reject("Invalid credentials");

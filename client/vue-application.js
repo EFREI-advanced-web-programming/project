@@ -1,10 +1,8 @@
-const Home = window.httpVueLoader('./components/Home.vue')
 const Basket = window.httpVueLoader('./components/Basket.vue')
 const Catalogue = window.httpVueLoader('./components/Catalogue.vue')
 const Login = window.httpVueLoader('./components/Login.vue')
 
 const routes = [
-  // { path: '/', component: Home, name: 'home' },
   { path: '/basket', component: Basket, name: 'basket' },
   { path: '/login', component: Login, name: 'login' },
   { path: '/catalogue', component: Catalogue, name: 'catalogue' }

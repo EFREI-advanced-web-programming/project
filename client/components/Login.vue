@@ -1,5 +1,5 @@
 <template>
-  <div class="container shadow">
+  <div class="container shadow-lg mt-5 mx-auto">
     <div class="row p-2" v-if="showLogin">
       <div class="col-12 text-center h3">LOGIN</div>
       <div class="col-4">
@@ -79,6 +79,8 @@ module.exports = {
         alert("Passwords must be at least of 3 characters");
       } else if (this.registerData.name === "" || this.registerData.lastname === "") {
         alert("Name and lastname cannot be empty");
+      } else if (this.registerData.login.length < 4) {
+        alert("Login must be at least of 4 characters");
       } else {
         this.$emit('register', this.registerData);
       }

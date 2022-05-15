@@ -79,7 +79,6 @@
 </template>
 <script>
 module.exports = {
-    // name : "basket",
     props: {
         books: { type: Array, default: [] },
         basket: { type: Array },
@@ -119,8 +118,6 @@ module.exports = {
             } else if (basketLine.qte <= 0 || basketLine.qte > this.getBook(basketLine).stock) {
                 alert("Please select a quantity between 1 and the available stock");
             } else {
-                // console.log("Available stock: ");
-                // console.log();
                 basketLine.qte = Number.parseInt(basketLine.qte);
                 let basketLineEmit = {
                     "basket_line_id": basketLine.basket_line_id,
@@ -131,12 +128,6 @@ module.exports = {
                 this.$emit('update-item-at-basket', basketLineEmit);
                 this.exitEditBasketLine();
             }
-            // console.log(basketLine);
-
-            //     basketLine.qte = Number.parseInt(basketLine.qte);
-            //     this.$emit('update-item-at-basket',basketLine);
-            //     this.exitEditBasketLine();
-            // }
         },
         exitEditBasketLine() {
             this.editingBasketLine.basket_id = -1;
@@ -148,22 +139,16 @@ module.exports = {
             if (this.editingBasketLine.book_id !== -1) {
                 alert("You have unsaved changes. Please save or discard them before validating your basket");
             } else {
-                if(confirm("Are you sure you want to validate your basket? This action cannot be undone")){
+                if (confirm("Are you sure you want to validate your basket? This action cannot be undone")) {
                     this.$emit('validate-basket');
                 }
-                
             }
-
         },
         deleteBasket() {
             if (confirm("This will delete all items in your basket, do you want to continue?")) {
                 this.$emit('clear-basket');
             }
-
         }
-
     }
 };
 </script>
-<style>
-</style>

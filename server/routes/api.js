@@ -42,11 +42,6 @@ router.use((req, res, next) => {
 
 //to login, email and password must be sent in the body
 router.post("/login", async (req, res) => {
-  // if (req.session.userId !== null) {
-  //   res.status(400).json({ message: "There is already a user logged. Please logout first" });
-  //   return
-  // }
-
   const password = req.body.password;
   const login = req.body.login;
 
@@ -69,7 +64,7 @@ router.post("/login", async (req, res) => {
             resolve({
               user_id: res[0].user_id,
               login: res[0].login,
-              profil:res[0].profil
+              profil: res[0].profil
             });
           } else {
             reject("Invalid credentials");
@@ -78,7 +73,6 @@ router.post("/login", async (req, res) => {
       }
     })
   })
-
   try {
     let requete = await promiseQuery;
     req.session.userId = requete.user_id;
@@ -92,10 +86,6 @@ router.post("/login", async (req, res) => {
   }
 });
 router.post("/register", async (req, res) => {
-  // if (req.session.userId !== null) {
-  //   res.status(400).json({ message: "There is already a user logged. Please logout first" });
-  //   return
-  // }
   let name = req.body.name;
   let lastname = req.body.lastname;
   let login = req.body.login;
@@ -144,15 +134,9 @@ router.post("/register", async (req, res) => {
   })
 })
 router.post("/logout", async (req, res) => {
-  // if (req.session.userId === null) {
-  //   res.status(400).json({ message: "nobody was logged in" });
-  //   return
-  // } else {
   req.session.userId = null;
-  res.status(200).json({ message:"logged out"});
-  // }
+  res.status(200).json({ message: "logged out" });
 });
-
 
 router.route("/books")
   // get All the books in the database
@@ -303,7 +287,6 @@ router.route("/books/:book_id")
       })
     })
   });
-
 
 router.route("/basket")
   /*

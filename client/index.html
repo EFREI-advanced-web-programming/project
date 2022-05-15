@@ -9,80 +9,50 @@
   <script src="https://cdn.jsdelivr.net/npm/http-vue-loader/src/httpVueLoader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
   <div id="app">
-    <header>
-      <h1>EFREI LIBRARY</h1>
-      <nav>
-        <router-link to='/'>Accueil</router-link> | 
-        <router-link to ='/catalogue'>Catalogue</router-link> | 
-        <router-link to='/basket'>My basket</router-link> |             
-       <router-link to='/login'>login</router-link>
-       <router-view
-       :books="books"
-       :basket="basket"
-       :isadmin="isAdmin"
-       :userid="userId"
-       @delete-item-from-basket = "deleteItemFromBasket"
-       @update-item-at-basket = "updateItemAtBasket"
-       @validate-basket="validateBasket"
-       @clear-basket="deleteBasket"
+    <nav class="navbar navbar-light bg-light sticky-top">
+      <span class="navbar-brand" href="/#/catalogue">EFREI LIBRARY</span>
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item">
+          <router-link to='/catalogue'>Catalogue</router-link>
+        </li>
+        <li class="list-group-item" v-if="userId !== -1">
+          <router-link to='/basket'>My basket</router-link>
+        </li>
+        <li class="list-group-item" v-if="userId === -1">
+          <router-link to='/login'>login</router-link>
+        </li>
+        <li class="list-group-item" v-else>
+          <button @click="logout()" style="border:0; color: #007bff; background:transparent">Logout</button>
+        </li>
+      </ul>
+    </nav>
+    <nav>
+      <router-view :books="books" :basket="basket" :isadmin="isAdmin" :userid="userId"
+        @delete-item-from-basket="deleteItemFromBasket" @update-item-at-basket="updateItemAtBasket"
+        @validate-basket="validateBasket" @clear-basket="deleteBasket" @get-books="getBooks"
+        @add-item-to-basket="addItemToBasket" @remove-book-from-basket="deleteItemFromBasket" @delete-book="deleteBook"
+        @add-book="addBook" @login="login" @register="register"></router-view>
+    </nav>
 
-       @get-books = "getBooks"
-       @add-item-to-basket = "addItemToBasket"
-       @remove-book-from-basket = "deleteItemFromBasket"
-       @delete-book="deleteBook"
-       @add-book="addBook"
-     ></router-view>
-
-     <!-- <h1>userId</h1>
-        <div v-text="userId"></div> -->
-        
-     <!-- :invaliddata="invaliddata"
-       :user="user"
-       @add-article="addArticle"
-       @delete-article="deleteArticle"
-       @update-article="updateArticle"
-       @add-article-cart="addArticleCart"
-       @update-from-panier="editArticleInCart"
-       @remove-from-cart="removeFromPanier"
-       @pay-cart="payer"
-       @login="login" -->
-      </nav>
-    </header>
-    <!-- <br><br><br><br><br><br><br><br><br>
-    <h1>Books</h1>
-        <div v-for=" book in books">
-          <span v-text="book.book_id"></span>
-          <span v-text="book.name"></span>
-          <span v-text = "book.url"></span>
-          <span v-text="book.stock"></span>
-        </div>
-        <br>
-        <br>
-        <br>
-        <h1>Basket</h1>
-        <div v-for=" basketLine in basket">
-          book_id: <span v-text="basketLine.book_id"></span>
-          | basket_id: <span v-text="basketLine.basket_id"></span>
-          | basket_line_id: <span v-text="basketLine.basket_line_id"></span>
-          | qte: <span v-text="basketLine.qte"></span>
-        </div>
-
-    <main>
-      WELCOME TO MAIN
-
-    </main> -->
   </div>
   <script src="/vue-application.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -1,12 +1,5 @@
 <template>
     <div>
-        <!-- <div v-for="book in books" :key="book.book_id">
-            <span>book_id: {{ book.book_id }}</span> |
-            <span>name: {{ book.name }}</span> |
-            <span>stock: {{ book.stock }}</span>
-        </div> -->
-
-
         <div class="w-75 mx-auto shadow">
             <div class="row p-2">
                 <div class="col-7">
@@ -15,8 +8,7 @@
                 <div class="col-5">
                     <div class="input-group">
                         <div class="form-outline">
-                            <input type="search" placeholder="Search" v-model="searchString" class="form-control"/>
-                            
+                            <input type="search" placeholder="Search" v-model="searchString" class="form-control" />
                         </div>
                         <button type="button" class="btn btn-primary">
                             <i class="fas fa-search"></i>
@@ -24,10 +16,6 @@
                     </div>
                 </div>
             </div>
-
-
-            <!-- <div v-if="books.length === 0" class="text-center h4 p-2">You have no items in your basket</div> -->
-
             <div>
                 <table class="table table-striped">
                     <tbody>
@@ -105,7 +93,6 @@
 </template>
 <script>
 module.exports = {
-    // name : "catalogue",
     props: {
         books: { type: Array, default: [] },
         basket: { type: Array },
@@ -128,7 +115,6 @@ module.exports = {
         };
     },
     async mounted() {
-        // this.$emit('get-books');
     },
     methods: {
         isInBasket(bookId) {
@@ -136,7 +122,6 @@ module.exports = {
         },
         getBook(basketLine) {
             let book = this.books.find(b => b.book_id === basketLine.book_id);
-            // console.log(book);
             return book;
         },
         cleanAddingBook() {
@@ -152,7 +137,6 @@ module.exports = {
                 this.$emit('add-item-to-basket', this.addingBook);
                 this.cleanAddingBook();
             }
-
         },
         showFormToAddBookToBasket(book) {
             this.addingBook.book_id = book.book_id;

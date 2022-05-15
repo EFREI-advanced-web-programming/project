@@ -14,10 +14,11 @@ db.connect(function (err) {
     console.log("base de données connectée");
 }
 );
-db.query("SHOW TABLES;", async (err, res) => {
-    // console.log(res);
-});
 
-db.query("Select * from user;", async (err, res) => {
-    // console.log(res);
-});
+// db.query("SHOW TABLES;", async (err, res) => {
+//     console.log(res);
+// });
+
+// db.query("Select * from user;", async (err, res) => {
+//     console.log(res);
+// });
